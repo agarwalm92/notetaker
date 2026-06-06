@@ -4,7 +4,10 @@ import noteRoutes from "./routes/noteRoutes.js";
 const app = express();
 
 app.use("/api/notes", noteRoutes);
+// app.use("/api/product", productRoutes);
+// app.use("/api/user", userRoutes);
+
 
 app.listen(5001, ()=>{
     console.log("Server listening on http://localhost:5001/api/");
-}); 
+});  
