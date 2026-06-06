@@ -1,4 +1,4 @@
-import Note from '../models/note.js';
+import Note from "../model/Note.js";
 
 export async function getAllNotes(req, res) {
   try {
@@ -15,16 +15,17 @@ export async function createNote(req, res) {
   try {
     const { title, content, category, isPinned } = req.body;
 
-    const newNote = await Note.create({
+     const newNote = new Note({
       title,
       content,
       category,
       isPinned
     });
-    
-    res.status(201).json(newNote);
+
+    await newNote.save();
+    res.status(201).json("Note created successfully");
   } catch (error) {
-    res.status(400).json({ 
+    res.status(500).json({ 
       message: error.message || 'Validation failed'
     });
   }
