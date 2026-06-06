@@ -1,7 +1,13 @@
 import express from "express";
 import noteRoutes from "./routes/noteRoutes.js";
+import dotenv from 'dotenv';
+import { connectDB } from "./config/db.js";
+dotenv.config();
 
 const app = express();
+const Port = process.env.PORT || 5001;
+
+connectDB();
 
 app.use("/api/notes", noteRoutes);
 // app.use("/api/product", productRoutes);
