@@ -34,19 +34,16 @@ export async function createNote(req, res) {
 export async function updateNote(req, res) {
   try {
     const { id } = req.params;
-
-    const updatedNote = await Note.findByIdAndUpdate(id, req.body, {
-      new: true,
-      runValidators: true
-    });
+    const { title, content, category, isPinned} = req.body;
+    const updatedNote = await Note.findByIdAndUpdate(id, { title, content, category, isPinned},{new : true});
 
     if (!updatedNote) {
       return res.status(404).json({ 
         message: 'Note not found' 
       });
     }
+    res.status(200).json({ message: 'Note updated successfully' });
 
-    res.status(200).json(updatedNote);
   } catch (error) {
     res.status(400).json({ 
       message: error.message || 'Update failed' 
