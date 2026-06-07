@@ -11,6 +11,26 @@ export async function getAllNotes(req, res) {
     });
   }
 }
+
+export async function getNoteById(req, res) {
+  try {
+    //const { id } = req.params.id;
+    const note = await Note.findById(req.params.id); 
+
+    if (!note) {
+      return res.status(404).json({ 
+        message: 'Note not found' 
+      });
+    }
+
+    res.status(200).json(note);
+  } catch (error) {
+    res.status(500).json({ 
+      message: 'Server error while fetching notes'
+    });
+  }
+}
+
 export async function createNote(req, res) {
   try {
     const { title, content, category, isPinned } = req.body;
