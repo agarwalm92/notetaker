@@ -12,10 +12,12 @@ const redis = new Redis({
 });
 
 // 2. Create and export the rate limiter instance
-export const rateLimiter = new Ratelimit({
+const rateLimit = new Ratelimit({
   redis: redis,
   // slidingWindow strictly enforces 10 requests within any moving 20-second window
-  limiter: Ratelimit.slidingWindow(10, "20 s"),
+  limiter: Ratelimit.slidingWindow(100, "60 s"),
   analytics: true, // Optional: Enables dashboard metrics in Upstash
   prefix: "@upstash/ratelimit", // Optional: Customizes Redis key prefix
 });
+
+export default rateLimit;

@@ -1,4 +1,4 @@
-import rateLimiter from "../config/upstash.js";
+import rateLimit from "../config/upstash.js";
 
 export const rateLimiter = async (req, res, next) => { 
 //   const identifier = 
@@ -8,7 +8,7 @@ export const rateLimiter = async (req, res, next) => {
 
   try {
     // 2. Evaluate the request limit against Upstash Redis
-    const { success, limit, reset, remaining } = await rateLimiter.limit("my-ratelimit-key");
+    const { success, limit, reset, remaining } = await rateLimit.limit("my-ratelimit-key"); //use ip address
 
     // 3. Set standard HTTP Rate-Limit headers
     // res.setHeader("X-RateLimit-Limit", limit.toString());
