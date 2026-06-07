@@ -8,7 +8,7 @@ dotenv.config();
 const app = express();
 const Port = process.env.PORT || 5001;
 
-connectDB();
+
 
 //middleware
 app.use(express.json());
@@ -20,7 +20,8 @@ app.use("/api/notes", noteRoutes);
 // app.use("/api/product", productRoutes);
 // app.use("/api/user", userRoutes);
 
-
-app.listen(5001, ()=>{
+connectDB().then(() => {
+  app.listen(5001, () => {
     console.log("Server listening on http://localhost:5001/api/");
+  });
 });  
